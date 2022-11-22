@@ -1,7 +1,9 @@
 bs4
 contractions
+datasets
 ipdb
 jupyterlab
+lxml
 matplotlib
 networkx
 nltk
