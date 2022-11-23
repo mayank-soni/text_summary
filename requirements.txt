@@ -1,9 +1,3 @@
-pytest
-pylint
-ipdb
-jupyterlab
-numpy
-pandas
-matplotlib
-seaborn
-scikit-learn
+ipykernel
+'transformers[sentencepiece]'
+tensorflow
