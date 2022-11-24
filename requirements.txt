@@ -7,3 +7,8 @@ pandas
 matplotlib
 seaborn
 scikit-learn
+gensim==3.8.3
+contractions
+rouge
+ipykernel
+nltk
