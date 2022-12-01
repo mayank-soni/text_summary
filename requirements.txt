@@ -15,3 +15,4 @@ transformers
 datasets
 rouge-score
 nltk
+torchvision

@@ -2,8 +2,10 @@ import numpy as np
 import nltk
 from transformers import AutoTokenizer
 from text_summary.train.params import MODEL_CHECKPOINT, METRIC_NAME
+from datasets import load_metric
 
 def metric_fn(eval_predictions):
+    metric = load_metric(METRIC_NAME)
     tokenizer = AutoTokenizer.from_pretrained(MODEL_CHECKPOINT)
     predictions, labels = eval_predictions
     decoded_predictions = tokenizer.batch_decode(predictions, skip_special_tokens=True)
