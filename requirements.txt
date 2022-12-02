@@ -15,6 +15,7 @@ transformers
 datasets
 rouge-score
 nltk
+torchvision
 
 #front-end
 uvicorn
