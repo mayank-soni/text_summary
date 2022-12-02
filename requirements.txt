@@ -7,3 +7,12 @@ pandas
 matplotlib
 seaborn
 scikit-learn
+google-cloud-storage
+
+#ML
+tensorflow==2.9.2
+transformers
+datasets
+rouge-score
+nltk
+uvicorn

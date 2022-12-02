@@ -3,10 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 import requests
 
-# import tensorflow as tf
-# from tensorflow import keras
-# from keras.models import load_model
-# from transformers import AutoTokenizer, pipeline, TFAutoModelForSeq2SeqLM
+import tensorflow as tf
+from tensorflow import keras
+from keras.models import load_model
+from transformers import AutoTokenizer, pipeline, TFAutoModelForSeq2SeqLM
 # from tensorflow.python.keras.saving import hdf5_format
 
 app = FastAPI()
@@ -31,20 +31,34 @@ def predict(keywords: str,              #e.g. world cup
     url = 'https://newsdata.io/api/1/news'
     params = {"apikey": os.environ['newsData_API_key'], "category":f"{category}", "language":"en", "q":f"{keywords}"}
     response = requests.get(url, params=params)
-    return response.json()
+    #return response.json()
+    prediction = response.json()
+    # return prediction
+    articles = []
+    for item in prediction['results'][0:1]:
+        if item['content'] != None :
+            articles.append(item['content'])
 
-# # load model
-# new_model = TFAutoModelForSeq2SeqLM.from_pretrained('trained_model')
-# new_model.summary()
+    summaries = []
+    for article in articles:
+        summaries.append(summarization(article))
+    return summaries
+    # final = {articles[i]: summaries[i] for i in range(len(articles))}
 
-# # load summary of sports articles
-# model_checkpoint = 'sshleifer/distilbart-cnn-12-6'
-# tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
+    # return final
 
-# if 't5' in model_checkpoint:
-#     document = "summarize: " + item['content']
-# tokenized = tokenizer([item['content']], return_tensors='np')
-# out = new_model.generate(**tokenized, max_length=128)
+# load model
+new_model = TFAutoModelForSeq2SeqLM.from_pretrained('trained_model')
+new_model.summary()
 
-# with tokenizer.as_target_tokenizer():
-#     print(tokenizer.decode(out[0]))
+# load summary of sports articles
+def summarization(item):
+    # return 'hello'
+    model_checkpoint = 'sshleifer/distilbart-cnn-12-6'
+    tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
+    tokenized = tokenizer(item, return_tensors='np')
+    return tokenized
+    # out = new_model.generate(**tokenized, max_length=128)
+
+    # with tokenizer.as_target_tokenizer():
+    #     return(tokenizer.decode(out[0]))
