@@ -15,4 +15,9 @@ transformers
 datasets
 rouge-score
 nltk
+
+#front-end
 uvicorn
+fastapi
+httpx
+pytz

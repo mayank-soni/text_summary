@@ -38,27 +38,22 @@ def predict(keywords: str,              #e.g. world cup
     for item in prediction['results'][0:1]:
         if item['content'] != None :
             articles.append(item['content'])
-
     summaries = []
     for article in articles:
         summaries.append(summarization(article))
-    return summaries
-    # final = {articles[i]: summaries[i] for i in range(len(articles))}
-
-    # return final
+    # return {'summary': summaries[0]}
+    final = {articles[i]: summaries[i] for i in range(len(articles))}
+    return final
 
 # load model
-new_model = TFAutoModelForSeq2SeqLM.from_pretrained('trained_model')
-new_model.summary()
+model_checkpoint = 'sshleifer/distilbart-cnn-12-6'
+new_model = TFAutoModelForSeq2SeqLM.from_pretrained(model_checkpoint, from_pt = 'True')
+# new_model.summary()
 
 # load summary of sports articles
 def summarization(item):
-    # return 'hello'
-    model_checkpoint = 'sshleifer/distilbart-cnn-12-6'
     tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
     tokenized = tokenizer(item, return_tensors='np')
-    return tokenized
-    # out = new_model.generate(**tokenized, max_length=128)
-
-    # with tokenizer.as_target_tokenizer():
-    #     return(tokenizer.decode(out[0]))
+    out = new_model.generate(**tokenized, max_length=128)
+    with tokenizer.as_target_tokenizer():
+        return(tokenizer.decode(out[0]))
