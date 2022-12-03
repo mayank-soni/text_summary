@@ -68,8 +68,8 @@ def predict(keywords: str):              #e.g. world cup
         summaries2.append(summarization2(tokenized))
 
     # return {'summary': summaries[0]}
-    final = {i: {'article': articles[i],
-                 'summary': summaries[i].lstrip('</s><s> ').rstrip('<s> ').rstrip('<pad>').rstrip('</s'),
-                 'summary2': summaries2[i].replace('\n',' ').strip('</s>').rstrip('<s> ').rstrip('<pad>').rstrip('</s')}
-             for i in range(len(articles))}
+    final = {'article': articles[0],
+             'summary': summaries[0].lstrip('</s><s> ').rstrip('<s> ').rstrip('<pad>').rstrip('</s'),
+             'summary2': summaries2[0].replace('\n',' ').strip('</s>').rstrip('<s> ').rstrip('<pad>').rstrip('</s')}
+
     return final
