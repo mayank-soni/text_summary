@@ -1,0 +1,14 @@
+numpy
+pandas
+
+#ML
+tensorflow==2.9.2
+transformers
+datasets
+torchvision
+
+#front-end
+uvicorn
+fastapi
+httpx
+pytz

@@ -13,5 +13,5 @@ setup(name='text_summary',
       test_suite='tests',
       # include_package_data: to install data from MANIFEST.in
       include_package_data=True,
-      scripts=['scripts/text_summary-run'],
+    #   scripts=['scripts/text_summary-run'],
       zip_safe=False)
